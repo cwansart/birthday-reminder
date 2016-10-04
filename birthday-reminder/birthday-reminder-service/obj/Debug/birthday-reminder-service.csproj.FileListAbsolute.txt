@@ -1,0 +1,6 @@
+D:\Michael\Documents\Projekte\birthday-reminder\birthday-reminder\birthday-reminder-service\bin\Debug\birthday-reminder-service.exe.config
+D:\Michael\Documents\Projekte\birthday-reminder\birthday-reminder\birthday-reminder-service\bin\Debug\birthday-reminder-service.exe
+D:\Michael\Documents\Projekte\birthday-reminder\birthday-reminder\birthday-reminder-service\bin\Debug\birthday-reminder-service.pdb
+D:\Michael\Documents\Projekte\birthday-reminder\birthday-reminder\birthday-reminder-service\obj\Debug\birthday-reminder-service.csprojResolveAssemblyReference.cache
+D:\Michael\Documents\Projekte\birthday-reminder\birthday-reminder\birthday-reminder-service\obj\Debug\birthday-reminder-service.exe
+D:\Michael\Documents\Projekte\birthday-reminder\birthday-reminder\birthday-reminder-service\obj\Debug\birthday-reminder-service.pdb
