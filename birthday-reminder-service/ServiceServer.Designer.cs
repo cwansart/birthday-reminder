@@ -1,6 +1,6 @@
 ﻿namespace birthday_reminder_service
 {
-    partial class Service1
+    partial class ServiceServer
     {
         /// <summary> 
         /// Required designer variable.
