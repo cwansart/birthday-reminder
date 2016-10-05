@@ -26,6 +26,7 @@ namespace birthday_reminder_service
             this.timer.Interval = 3600000;
             this.timer.Elapsed += new System.Timers.ElapsedEventHandler(this.check_for_birthdays);
             timer.Enabled = true;
+            Logger.DeleteLog();
             Logger.WriteErrorLog("ServerService started");
         }
 

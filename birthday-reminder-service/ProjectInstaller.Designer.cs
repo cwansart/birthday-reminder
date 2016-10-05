@@ -39,6 +39,8 @@
             // 
             // serviceInstaller1
             // 
+            this.serviceInstaller1.Description = "Background service for the birthday-reminder-gui";
+            this.serviceInstaller1.DisplayName = "Birthday-Reminder";
             this.serviceInstaller1.ServiceName = "birthday-reminder";
             this.serviceInstaller1.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
             // 
