@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SQLite;
 using System.Diagnostics;
 using System.Linq;
 using System.ServiceProcess;
@@ -41,6 +42,15 @@ namespace birthday_reminder_service
         /// </summary>
         private void check_for_birthdays(object sender, ElapsedEventArgs e)
         {
+            // TODO: Need to be modified to return only a few of the next birthdays
+            var sql = "select firstname, lastname, birthday from information where lastviewed > " + DateTime.Now.Year + ";";
+            SQLiteCommand command = new SQLiteCommand(sql, Database.Instance);
+            SQLiteDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                // process birtdays
+            }
             Logger.WriteErrorLog("Birthdays checked successfully");
         }
     }
