@@ -9,14 +9,21 @@ namespace birthday_reminder_service
 {
     public static class Logger
     {
+        private static readonly string Dir = Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments) + "\\BirthdayReminder";
         /// <summary>
-        /// Delete the logfile
+        /// Initialize the logfile
         /// </summary>
-        public static void DeleteLog()
+        public static void InitLog()
         {
-            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "\\LogFile.txt"))
+            var di = new DirectoryInfo(Dir);
+            if (!di.Exists)
             {
-                File.Delete(AppDomain.CurrentDomain.BaseDirectory + "\\LogFile.txt");
+                di.Create();
+            }
+
+            if (File.Exists(Dir + "\\LogFile.txt"))
+            {
+                File.Delete(Dir + "\\LogFile.txt");
             }
         }
 
@@ -29,7 +36,7 @@ namespace birthday_reminder_service
             StreamWriter sw = null;
             try
             {
-                sw = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "\\LogFile.txt", true);
+                sw = new StreamWriter(Dir + "\\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now.ToString() + ": " + ex.Source.ToString().Trim() + "; " +
                              ex.Message.ToString().Trim());
                 sw.Flush();
@@ -49,7 +56,7 @@ namespace birthday_reminder_service
             StreamWriter sw = null;
             try
             {
-                sw = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "\\LogFile.txt", true);
+                sw = new StreamWriter(Dir + "\\LogFile.txt", true);
                 sw.WriteLine(DateTime.Now.ToString() + ": " + message);
                 sw.Flush();
                 sw.Close();
