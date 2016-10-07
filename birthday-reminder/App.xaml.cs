@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace birthday_reminder_gui
+namespace birthday_reminder
 {
     /// <summary>
     /// Interaction logic for App.xaml

@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace birthday_reminder_gui
+namespace birthday_reminder
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

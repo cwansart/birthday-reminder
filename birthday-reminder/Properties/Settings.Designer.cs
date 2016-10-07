@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace birthday_reminder_gui.Properties
+namespace birthday_reminder.Properties
 {
 
 
