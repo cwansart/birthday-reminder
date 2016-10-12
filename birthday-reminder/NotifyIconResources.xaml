@@ -11,7 +11,7 @@
 
     <!-- The application's NotifyIcon-->
     <tb:TaskbarIcon x:Key="NotifyIcon"
-                    IconSource="/cake.ico"
+                    IconSource="/gift.ico"
                     ToolTipText="BirthdayReminder"
                     DoubleClickCommand="{Binding ShowWindowCommand}"
                     ContextMenu="{StaticResource SysTrayMenu}">

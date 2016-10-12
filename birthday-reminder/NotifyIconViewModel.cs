@@ -9,9 +9,7 @@ using System.Windows.Input;
 namespace birthday_reminder
 {
     /// <summary>
-    /// Provides bindable properties and commands for the NotifyIcon. In this sample, the
-    /// view model is assigned to the NotifyIcon in XAML. Alternatively, the startup routing
-    /// in App.xaml.cs could have created this view model, and assigned it to the NotifyIcon.
+    /// Provides bindable properties and commands for the NotifyIcon.
     /// </summary>
     public class NotifyIconViewModel
     {
@@ -29,6 +27,11 @@ namespace birthday_reminder
                     {
                         Application.Current.MainWindow = new MainWindow();
                         Application.Current.MainWindow.Show();
+                        birthday_reminder.Database.Add("test1", "test2", DateTime.Today);
+                        birthday_reminder.Database.Add("test3", "test4", DateTime.Today.AddDays(1));
+                        birthday_reminder.Database.Add("test5", "test6", DateTime.Today.AddDays(2));
+                        birthday_reminder.Database.Add("should not be", "in notification", DateTime.Today.AddDays(3));
+                        var test = birthday_reminder.Database.GetBirthdaysString();
                     }
                 };
             }
@@ -64,7 +67,7 @@ namespace birthday_reminder
 
 
     /// <summary>
-    /// Simplistic delegate command for the demo.
+    /// Simplistic delegate command.
     /// </summary>
     public class DelegateCommand : ICommand
     {
