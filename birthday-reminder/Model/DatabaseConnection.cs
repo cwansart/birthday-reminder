@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace birthday_reminder
+namespace birthday_reminder.Model
 {
     class DatabaseConnection
     {

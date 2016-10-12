@@ -24,5 +24,25 @@ namespace birthday_reminder
         {
             InitializeComponent();
         }
+
+        private void DataGrid_OnAutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if (e.Column.Header.ToString() == "firstname")
+            {
+                e.Column.Header = "Vorname";
+            }
+            else if (e.Column.Header.ToString() == "lastname")
+            {
+                e.Column.Header = "Nachname";
+            }
+            else if (e.Column.Header.ToString() == "birthday")
+            {
+                e.Column.Header = "Geburtsdatum";
+            }
+            else if (e.Column.Header.ToString() == "notification")
+            {
+                e.Column.Header = "Erinnerung";
+            }
+        }
     }
 }

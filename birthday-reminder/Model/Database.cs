@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace birthday_reminder
+namespace birthday_reminder.Model
 {
     public static class Database
     {
@@ -30,22 +30,34 @@ namespace birthday_reminder
             command.ExecuteNonQuery();
         }
 
-        public static string GetBirthdaysString()
+        public static InformationList GetBirthdays()
         {
             CalculateBirthdays();
-            var sb = new StringBuilder();
+            var result = new InformationList();
             var command = new SQLiteCommand(
-                "select firstname, lastname, day, month, year from information where exists (select information_id from notification where id = information_id);",
+                "select id, firstname, lastname, day, month, year from information where exists (select information_id from notification where id = information_id and viewed = 0) order by month asc, day asc, firstname asc, lastname asc;",
                 DatabaseConnection.Instance);
             var reader = command.ExecuteReader();
             while (reader.Read())
             {
-                sb.Append(Convert.ToString(reader["firstname"])
-                    + " " + Convert.ToString(reader["lastname"])
-                    + ": " + Convert.ToString(reader["day"]) + "." + Convert.ToString(reader["month"]) + "." +  Convert.ToString(reader["year"])
-                    + "\n");
+                result.Add(new Information(Convert.ToInt32(reader["id"]), Convert.ToString(reader["firstname"]), Convert.ToString(reader["lastname"]), ConvertDate(Convert.ToInt32(reader["day"]), Convert.ToInt32(reader["month"]), Convert.ToInt32(reader["year"])), true));
             }
-            return sb.ToString();
+            return result;
+        }
+
+        public static InformationList GetInformations()
+        {
+            CalculateBirthdays();
+            var result = GetBirthdays();
+            var command = new SQLiteCommand(
+                "select id, firstname, lastname, day, month, year from information where not exists (select information_id from notification where id = information_id and viewed = 0) order by month asc, day asc, firstname asc, lastname asc;",
+                DatabaseConnection.Instance);
+            var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                result.Add(new Information(Convert.ToInt32(reader["id"]), Convert.ToString(reader["firstname"]), Convert.ToString(reader["lastname"]), ConvertDate(Convert.ToInt32(reader["day"]), Convert.ToInt32(reader["month"]), Convert.ToInt32(reader["year"])), false));
+            }
+            return result;
         }
 
         private static void CalculateBirthdays()

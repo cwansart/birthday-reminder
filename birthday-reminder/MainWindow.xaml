@@ -3,11 +3,23 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:birthday_reminder.ViewModel"
         xmlns:local="clr-namespace:birthday_reminder"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="BirthdayReminder" Height="350" Width="525" Icon="gift.ico"
+        DataContext="{DynamicResource MainViewModel}">
+    <Window.Resources>
+        <vm:MainViewModel x:Key="MainViewModel"/>
+    </Window.Resources>
     <Grid>
-
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <DataGrid Grid.Row="0" ItemsSource="{Binding Path=informationView}" SelectedItem="{Binding Path=selectedInformation}" AutoGenerateColumns="True" AutoGeneratingColumn="DataGrid_OnAutoGeneratingColumn" IsReadOnly="True">
+            
+        </DataGrid>
+        <Button Grid.Row="1" Content="CSV Laden" Command="{Binding csvReadCommand, Mode=Default}"/>
     </Grid>
     <!--  -->
 </Window>
