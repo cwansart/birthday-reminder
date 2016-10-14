@@ -27,12 +27,6 @@ namespace birthday_reminder
                     {
                         Application.Current.MainWindow = new MainWindow();
                         Application.Current.MainWindow.Show();
-                        birthday_reminder.Model.Database.Add("test1", "test2", DateTime.Today);
-                        birthday_reminder.Model.Database.Add("test3", "test4", DateTime.Today.AddDays(1));
-                        birthday_reminder.Model.Database.Add("test5", "test6", DateTime.Today.AddDays(2));
-                        birthday_reminder.Model.Database.Add("should not be", "in notification", DateTime.Today.AddDays(3));
-                        var test = birthday_reminder.Model.Database.GetBirthdays();
-                        var test2 = birthday_reminder.Model.Database.GetInformations();
                     }
                 };
             }

@@ -38,10 +38,16 @@ namespace birthday_reminder
             else if (e.Column.Header.ToString() == "birthday")
             {
                 e.Column.Header = "Geburtsdatum";
+                if ((e.Column as DataGridTextColumn) != null)
+                    ((DataGridTextColumn) e.Column).Binding.StringFormat = "dd.MM.yyyy";
             }
             else if (e.Column.Header.ToString() == "notification")
             {
                 e.Column.Header = "Erinnerung";
+            }
+            else if (e.Column.Header.ToString() == "age")
+            {
+                e.Column.Header = "Alter";
             }
         }
     }

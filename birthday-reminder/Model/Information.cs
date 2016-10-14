@@ -13,6 +13,7 @@ namespace birthday_reminder.Model
         private string _lastname;
         private DateTime _birthday;
         private bool _notification;
+        private int? _age;
 
         public Information(int id, string firstname, string lastname, DateTime birthday, bool notification)
         {
@@ -21,6 +22,16 @@ namespace birthday_reminder.Model
             this.lastname = lastname;
             this.birthday = birthday;
             this.notification = notification;
+            this.age = null;
+            if (notification) this.age = calculateAge();
+        }
+
+        private int calculateAge()
+        {
+            var today = DateTime.Today.AddMonths(6);
+            var years = today.Year - birthday.Year;
+            if (today < birthday.AddYears(years)) years--;
+            return years;
         }
 
         public int getID()
@@ -88,6 +99,19 @@ namespace birthday_reminder.Model
                 {
                     _notification = value;
                     RaisePropertyChanged("notification");
+                }
+            }
+        }
+
+        public int? age
+        {
+            get { return _age; }
+            set
+            {
+                if (_age != value)
+                {
+                    _age = value;
+                    RaisePropertyChanged("age");
                 }
             }
         }

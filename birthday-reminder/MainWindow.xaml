@@ -17,7 +17,17 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <DataGrid Grid.Row="0" ItemsSource="{Binding Path=informationView}" SelectedItem="{Binding Path=selectedInformation}" AutoGenerateColumns="True" AutoGeneratingColumn="DataGrid_OnAutoGeneratingColumn" IsReadOnly="True">
-            
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <ContextMenu.ItemContainerStyle>
+                        <Style TargetType="MenuItem">
+                            <Setter Property="IsEnabled" Value="{Binding Path=isInformationSelected}"/>
+                        </Style>
+                    </ContextMenu.ItemContainerStyle>
+                    <MenuItem Header="Als 'gesehen' markieren" Command="{Binding removeNotificationCommand}" IsEnabled="{Binding isSelectedInNotification}"></MenuItem>
+                    <MenuItem Header="Entfernen" Command="{Binding deleteInformationCommand}"></MenuItem>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
         </DataGrid>
         <Button Grid.Row="1" Content="CSV Laden" Command="{Binding csvReadCommand, Mode=Default}"/>
     </Grid>

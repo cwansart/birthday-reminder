@@ -30,6 +30,20 @@ namespace birthday_reminder.Model
             command.ExecuteNonQuery();
         }
 
+        public static void RemoveNotification(int id)
+        {
+            var command = new SQLiteCommand("update notification set viewed = 1 where information_id = '" + id + "';", DatabaseConnection.Instance);
+            command.ExecuteNonQuery();
+        }
+
+        public static void Delete(int id)
+        {
+            var command = new SQLiteCommand("delete from information where rowid = " + id + ";", DatabaseConnection.Instance);
+            command.ExecuteNonQuery();
+            command = new SQLiteCommand("delete from notification where information_id = " + id + ";", DatabaseConnection.Instance);
+            command.ExecuteNonQuery();
+        }
+
         public static InformationList GetBirthdays()
         {
             CalculateBirthdays();
