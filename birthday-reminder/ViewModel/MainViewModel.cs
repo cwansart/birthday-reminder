@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,9 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
 using birthday_reminder.Model;
+using CsvHelper;
 using Hardcodet.Wpf.TaskbarNotification;
+using Microsoft.Win32;
 
 namespace birthday_reminder.ViewModel
 {
@@ -22,6 +25,7 @@ namespace birthday_reminder.ViewModel
         private Information _selectedInformation;
         private ICommand _removeNotificationCommand;
         private ICommand _deleteInformationCommand;
+        private ICommand _csvReadCommand;
 
         public MainViewModel()
         {
@@ -125,6 +129,44 @@ namespace birthday_reminder.ViewModel
             {
                 return _deleteInformationCommand ??
                        (_deleteInformationCommand = new RelayCommand(param => deleteInformation()));
+            }
+        }
+
+        private void csvRead()
+        {
+            string path;
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "CSV (*.csv)|*.csv|All files (*.*)|*.*";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                path = openFileDialog.FileName;
+                using (TextReader reader = File.OpenText(path))
+                {
+                    var csv = new CsvReader(reader);
+                    while (csv.Read())
+                    {
+                        try
+                        {
+                            var firstname = csv.GetField<string>(0);
+                            var lastname = csv.GetField<string>(1);
+                            var birthday = DateTime.ParseExact(csv.GetField<string>(2), "dd.MM.yyyy", null);
+                            Database.Add(firstname, lastname, birthday);
+                        }
+                        catch (Exception)
+                        {
+                            throw;
+                        }
+                    }
+                }
+                informations = Database.GetInformations();
+            }
+        }
+
+        public ICommand csvReadCommand
+        {
+            get
+            {
+                return _csvReadCommand ?? (_csvReadCommand = new RelayCommand(param => csvRead()));
             }
         }
     }
