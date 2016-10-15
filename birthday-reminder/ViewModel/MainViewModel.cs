@@ -4,9 +4,12 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
 using birthday_reminder.Model;
+using Hardcodet.Wpf.TaskbarNotification;
 
 namespace birthday_reminder.ViewModel
 {

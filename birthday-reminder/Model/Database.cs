@@ -61,7 +61,6 @@ namespace birthday_reminder.Model
 
         public static InformationList GetInformations()
         {
-            CalculateBirthdays();
             var result = GetBirthdays();
             var command = new SQLiteCommand(
                 "select id, firstname, lastname, day, month, year from information where not exists (select information_id from notification where id = information_id and viewed = 0) order by month asc, day asc, firstname asc, lastname asc;",
